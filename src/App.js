@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import navijson from './data/gnb.json';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
+  const [tabvar, settab] = useState(0)
+
+  const myfun = (v) => {
+    alert(v)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+      <ul className='d-flex '>
+        {
+          navijson.map((v, idx) => {
+            return (
+              <li onClick={function () { settab(idx); }}>{v.name}</li>
+
+
+            )
+          })
+        }
+      </ul>
+      <div className='border py-5 bg-dark text-white'>
+        {
+
+          navijson[tabvar] && <p>
+            <img src={navijson[tabvar].src} lat={navijson[tabvar].alt}></img>
+            <strong>{navijson[tabvar].name}</strong>
+          </p>
+        }
+      </div>
     </div>
   );
 }
